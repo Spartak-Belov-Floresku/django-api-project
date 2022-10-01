@@ -30,7 +30,7 @@ class UserAdmin(BaseUserAdmin):
     readonly_fields = ['last_login']
     add_fieldsets = (
         (None, {
-            'classes': ('wide',),  # assing Django CSS classes to page ! 'Optional'
+            'classes': ('wide',),  # CSS Django classe !'Optional'
             'fields': (
                 'email',
                 'password1',
