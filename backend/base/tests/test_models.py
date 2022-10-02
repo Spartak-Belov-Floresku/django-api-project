@@ -11,14 +11,14 @@ class ModelTests(TestCase):
     def test_craete_user_with_email_successful(self):
         """Test creating a user wiyth an email is successful."""
         email = 'test@mail.com'
-        passowrd = 'testpass123'
+        password = 'testpass123'
         user = get_user_model().objects.create_user(
             email=email,
-            passowrd=passowrd,
+            password=password,
         )
 
         self.assertEquals(user.email, email)
-        self.assertTrue(user.check_password(passowrd))
+        self.assertTrue(user.check_password(password))
 
     def test_new_user_email_normalized(self):
         """Test email is normalized for new users."""
