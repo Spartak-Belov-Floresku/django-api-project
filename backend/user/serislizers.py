@@ -12,11 +12,15 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for the user object."""
+    isAdmin = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = get_user_model()
-        fields = ['email', 'password', 'name']
+        fields = ['email', 'password', 'name', 'isAdmin']
         extra_kwargs = {'password': {'write_only': True, 'min_length': 5}}
+
+    def get_isAdmin(self, obj):
+        return obj.is_staff
 
     def create(self, validated_data):
         """Create and return a user with encrypted password."""

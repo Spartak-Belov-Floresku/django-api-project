@@ -9,8 +9,9 @@ import {
 import Header from './components/Header'
 import Footer from './components/Footer'
 
-import HomeScreen from './screens/HomeScreen';
+import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
+import RegisterScreen from './screens/RegisterScreen'
 
 function App() {
   return (
@@ -21,8 +22,11 @@ function App() {
             <Routes>
 
               <Route exact path='/' element={<HomeScreen />} />
+
               <Route exact path='/login' element={<LoginScreen />} />
               <Route path='/login/:redirect' element={<LoginScreen />} />
+              <Route exact path='/register' element={<RegisterScreen />} />
+              <Route path='/register/:redirect' element={<RegisterScreen />} />
 
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

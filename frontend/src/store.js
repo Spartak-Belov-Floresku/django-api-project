@@ -7,14 +7,16 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import {
     userLoginReducers,
+    userRegisterReducers,
 } from './reducers/userReducers'
 
 const reducer = combineReducers({
-    token: userLoginReducers,
+    userLogedIn: userLoginReducers,
+    userRegister: userRegisterReducers,
 })
 
 const initialState = {
-    token: {userToken: localStorage.getItem('token')? JSON.parse(localStorage.getItem('token')): null},
+    userLogedIn: {userInfo: localStorage.getItem('userInfo')? JSON.parse(localStorage.getItem('userInfo')): null},
 }
 
 const mmiddleware = [thunk]
