@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   backend:
-    build: 
+    build:
       context: .
       args:
         - DEV=true
@@ -21,7 +21,7 @@ services:
       - DB_PASS=changeme
     depends_on:
       - db_project
-  
+
   db_project:
     image: postgres:13-alpine
     volumes:
@@ -32,4 +32,4 @@ services:
       - POSTGRES_PASSWORD=changeme
 
 volumes:
-  dev-db-data: 
+  dev-db-data:
