@@ -18,7 +18,7 @@ export default function LoginScreen() {
     const navigate = useNavigate()
 
     const {error, loading, userInfo } = useSelector(state => state.userLogedIn)
-
+    
     useEffect(() => {
 
       if(userInfo)
