@@ -8,7 +8,12 @@ from drf_spectacular.utils import (
     OpenApiTypes,
 )
 from rest_framework import viewsets, mixins, status
-from rest_framework.decorators import action
+from rest_framework.decorators import (
+    api_view,
+    action,
+    authentication_classes,
+    permission_classes,
+)
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -37,8 +42,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
     """View for manage recipe APIs."""
     serializer_class = serializers.RecipeDetailSerializer
     queryset = Recipe.objects.all()
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
 
     def _params_to_ints(self, qs):
         """Convert a list of strings to integers."""
@@ -46,6 +51,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Retrieve recipes for authenticated user."""
+        print('Here 1')
         tags = self.request.query_params.get('tags')
         ingredients = self.request.query_params.get('ingredients')
         queryset = self.queryset
@@ -64,8 +70,15 @@ class RecipeViewSet(viewsets.ModelViewSet):
             user=self.request.user
             ).order_by('-id').distinct()
 
+    @action(methods=['get'], detail=False, url_path="list")
+    def get_list_recipes(self, request):
+        recipes =  self.queryset.order_by('id')
+        serializer = self.get_serializer(recipes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     def get_serializer_class(self):
         """Return the serializer class for request."""
+        print('Here 3')
         if self.action == 'list':
             return serializers.RecipeSerializer
         elif self.action == 'upload_image':
@@ -110,6 +123,7 @@ class BaseRecipeAttrViewSet(mixins.DestroyModelMixin,
 
     def get_queryset(self):
         """Filter querset to authenticated user."""
+        print('Here 2')
         assigned_only = bool(
             int(self.request.query_params.get('assigned_only', 0))
         )

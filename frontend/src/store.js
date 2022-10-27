@@ -12,11 +12,16 @@ import {
     userUpdateProfileReducers,
 } from './reducers/userReducers'
 
+import {
+    recipeListReducers,
+} from './reducers/recipeReducers'
+
 const reducer = combineReducers({
     userLogedIn: userLoginReducers,
     userRegister: userRegisterReducers,
     userDetails: userDetailsReducers,
-    userUpdateProfile: userUpdateProfileReducers,  
+    userUpdateProfile: userUpdateProfileReducers,
+    recipeList: recipeListReducers,
 })
 
 const initialState = {

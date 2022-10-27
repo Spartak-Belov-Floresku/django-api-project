@@ -10,7 +10,7 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 // import { listMyOrders } from '../actions/orderActions'
 
 export default function ProfileScreen() {
-    
+
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -30,26 +30,26 @@ export default function ProfileScreen() {
         if(!userInfo){
             navigate(`/login`)
         }else{
-            if(!userProfile || !userProfile.name || success || userInfo.id !== userProfile.id){
+            if(!userProfile || success || userInfo.id !== userProfile.id){
                 dispatch({type: USER_UPDATE_PROFILE_RESET})
                 dispatch(getUserDetails())
                 // dispatch(listMyOrders())
                 setPassword('')
                 setConfirmPassword('')
             }else{
-                setName(userProfile.name) 
+                setName(userProfile.name)
                 setEmail(userProfile.email)
             }
         }
 
         if(errorProfile == 'Invalid token.')
             dispatch(logout())
-  
+
     }, [dispatch, userInfo, userProfile, success])
 
     const submitHandler = e => {
         e.preventDefault()
-        if(password != confirmPassword) 
+        if(password != confirmPassword)
             setMessage('Passwords do not match')
         else if(password.length < 8 && password.length)
             setMessage('Passwords must be at least 8 characters')
@@ -63,7 +63,7 @@ export default function ProfileScreen() {
             setPassword('');
             setConfirmPassword('');
     }
-    
+
   return (
     <Row>
         <Col md={3}>
@@ -121,16 +121,16 @@ export default function ProfileScreen() {
                 </Form.Group>
 
                 <Button
-                    className='mt-2' 
+                    className='mt-2'
                     type='submit'
                     variant='primary'>
                         Update
-                </Button> 
+                </Button>
 
             </Form>
         </Col>
         <Col md={9}>
-            
+
         </Col>
     </Row>
   )
